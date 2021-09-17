@@ -20,7 +20,6 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Joël Karhamba',
             'email' => 'joelkarhamba@hotmail.com',
-            'role_id' => 1,
             'is_active' => true,
             'photo_id' =>1,
             'password'=>bcrypt(1234567),

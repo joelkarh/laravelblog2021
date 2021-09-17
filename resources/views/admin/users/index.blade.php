@@ -1,1 +1,38 @@
-<h1>hello</h1>
+@extends('layouts.admin')
+@section('content')
+<h1>Users</h1>
+<table class="table striped">
+    <thead>
+        <tr>
+        <th scope="col">id</th>
+        <th scope="col">Photo</th>
+        <th scope="col">Name</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Role</th>
+        <th scope="col">Active</th>
+        <th scope="col">Created</th>
+        <th scope="col">Updated</th>
+    </tr>
+    </thead>
+    <tbody>
+        @if ($users)
+        @foreach ($users as $user )
+            <tr>
+                <td>{{$user->id}}</td>
+                <td>{{$user->photo_id}}</td>
+                <td>{{$user->name}}</td>
+                <td>{{$user->email}}</td>
+                <td>
+                    @foreach ($user->roles as $role)
+                        <span class="badge badge-pill badge-info">{{$role->name}}</span>
+                    @endforeach
+                </td>
+                <td>{{$user->is_active===1? 'Active': 'Not active'}}</td>
+                <td>{{$user->created_at}}</td>
+                <td>{{$user->updated_at}}</td>
+            </tr>
+        @endforeach
+        @endif
+    </tbody>
+</table>
+@endsection
