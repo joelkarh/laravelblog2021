@@ -26,3 +26,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function(){
 
     Route::resource('users', App\Http\Controllers\AdminUsersController::class);
 }); //prefix wilt zeggen voorvoegsel en in dit geval is het de admin map
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

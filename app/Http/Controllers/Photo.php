@@ -2,34 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\UsersRequest;
-use Illuminate\Support\Facades\Hash;
 
-class AdminUsersController extends Controller
+class Photo extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    // public function __construct()
-    // {
-    //     return $this->middleware('auth');
-    // } goed voor 5controllers
     public function index()
     {
-        $users = User::all(); //orm queries
-        // query builder 2de manier
-        // $users= DB::table('users')->get();
-        $roles = Role::all();
-        //manier 1 met queries orm
-        // return view('admin.users.index', ['users'=>$users, 'roles'=>$roles]);
-        //manier 2 
-        return view('admin.users.index', compact('users', 'roles'));
+        //
     }
 
     /**
@@ -39,10 +23,7 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        //De pluck methode retourneert een associatieve array die je kan overdragen
-        // naar een formulier in je blade pagina.
-        $roles = Role::pluck('name','id')->all();
-        return view('admin.users.create', compact('roles'));
+        //
     }
 
     /**
@@ -51,19 +32,9 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsersRequest $request)
+    public function store(Request $request)
     {
         //
-        $user= new User();
-        $user->name =$request->name ;
-        $user->email=$request->email;
-        $user->is_active=$request->is_active;
-        $user->password= Hash::make($request['password']);
-        $user->save();
-        // wegschrijven van tussentabel
-        $user->roles()->sync($request->roles, false);
-        
-        return redirect('/admin/users');
     }
 
     /**

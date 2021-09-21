@@ -27,7 +27,7 @@
                         <span class="badge badge-pill badge-info">{{$role->name}}</span>
                     @endforeach
                 </td>
-                <td>{{$user->is_active===1? 'Active': 'Not active'}}</td>
+                <td>{{$user->is_active==1? 'Active': 'Not active'}}</td>
                 <td>{{$user->created_at}}</td>
                 <td>{{$user->updated_at}}</td>
             </tr>
