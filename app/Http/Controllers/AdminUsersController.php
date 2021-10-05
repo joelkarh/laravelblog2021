@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UsersRequest;
@@ -58,6 +59,12 @@ class AdminUsersController extends Controller
         $user->name =$request->name ;
         $user->email=$request->email;
         $user->is_active=$request->is_active;
+        if($file=$request->file('photo_id')){
+            $name= time() . $file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo= Photo::create(['file'=>$name]);
+            $user->photo_id=$photo->id;
+        }
         $user->password= Hash::make($request['password']);
         $user->save();
         // wegschrijven van tussentabel
